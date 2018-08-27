@@ -4,12 +4,12 @@ module.exports = function(app) {
             //res.send("<html><body><h1>Listando os produtos</h1></body></html>");
             var mysql = require('mysql');
             var connection = app.infra.connectionFactory();
-            var produtosBanco = new app.infra.ProdutosDAO(connection);
+            var produtosDAO = new app.infra.ProdutosDAO(connection);
 
-            produtosBanco.lista(function(err, results){
+            produtosDAO.lista(function(err, results){
 
                 if(err){
-                    res.send(err);
+                    console.log(err);
                 }else{
                     res.render('produtos/lista', {lista: results});
                     //res.send(results);
@@ -18,6 +18,22 @@ module.exports = function(app) {
 
             connection.end();
            
+        });
+
+        app.get('/produtos/form',function(req,res){
+            res.render('produtos/form');
+        });
+
+
+        app.post('/produtos/salva',function(req,res){
+
+            var produto = req.body;
+        
+            var connection = app.infra.connectionFactory();
+            var produtosDAO = new app.infra.ProdutosDAO(connection);
+            produtosDAO.salva(produto, function(erros,resultados){
+                res.render('produtos/lista');
+            });
         });
 }
 

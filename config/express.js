@@ -1,6 +1,8 @@
 var express = require('express');
 //biblioteca que faz o carregamento automatico de modulos
 var load = require('express-load');
+//Biblioteca que vai preencher a variavel body criada pelo express na requisição
+var bodyParser = require('body-parser');
 
 module.exports = function() {
     var app = express();
@@ -10,6 +12,8 @@ module.exports = function() {
     //por default o ejs vai procurar os arquivos na pasta views na raiz do projeto
     //O caminho é relativo ao app.js que é o arquivo que levanta o servidor.
     app.set('views', './app/views');
+
+    app.use(bodyParser.urlencoded({extended: true}));
 
     //carrega modulos a parti da pasta 'app'
     //a ordem de carregamento é importante, pois 'routes' depende de 'infra'
