@@ -42,7 +42,15 @@ module.exports = function(app) {
             var erros = req.validationErrors();
 
             if(erros){
-                res.render('produtos/form', { errosValidacao : erros, produto : produto});
+                res.format({
+                    html: function(){
+                        //Status code 400 = bad request
+                        res.status(400).render('produtos/form',{errosValidacao:erros,produto:produto});
+                    },
+                    json: function(){
+                        res.status(400).json(erros);
+                    }
+                });
                 return;
             }
         
@@ -57,4 +65,3 @@ module.exports = function(app) {
         });
 }
 
-// res.send(results);
