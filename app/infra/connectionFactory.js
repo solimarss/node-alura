@@ -3,9 +3,9 @@ var mysql = require('mysql');
 function createDBConnection(){
     return mysql.createConnection({
             host : 'localhost',
-            user : 'solimar',
+            user : 'root',
             password : '123456',
-            database : 'casadocodigo'
+            database : 'casadocodigo_nodejs'
           });
 
 }
