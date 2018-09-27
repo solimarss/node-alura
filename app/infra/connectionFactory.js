@@ -5,7 +5,7 @@ function createDBConnection() {
         return mysql.createConnection({
             host: 'localhost',
             user: 'root',
-            password: '',
+            password: '123456',
             database: 'casadocodigo_nodejs'
         });
     }
@@ -14,7 +14,7 @@ function createDBConnection() {
         return mysql.createConnection({
             host: 'localhost',
             user: 'root',
-            password: '',
+            password: '123456',
             database: 'casadocodigo_nodejs_test'
         });
     }
